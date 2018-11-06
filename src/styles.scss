@@ -1,0 +1,18 @@
+html, body {
+  margin: 0;
+  background-color: #faf3e2;
+}
+
+button {
+  border-radius: 0.5em;
+  color: #faf3e2;
+  background-color: #475b8b;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  box-shadow: 0 4px #999;
+}
+
+button:active {
+  transform: translateY(4px);
+}
