@@ -51,7 +51,7 @@ import {animate, sequence, state, style, transition, trigger} from '@angular/ani
           }),
           animate('0.5s'),
           style({
-            transform: 'scale(2,2'
+            transform: 'scale(2,2)'
           }),
           animate('1s')
         ])
