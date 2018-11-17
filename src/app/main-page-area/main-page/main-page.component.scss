@@ -1,10 +1,39 @@
-.img {
-  width: 80px;
+.parent-container {
   height: 80px;
+  overflow: hidden;
+  position: relative;
+  margin-top: 160px;
 }
 
 .papaHead {
+  width: 50%;
+  height: 80px;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  img {
+    position: absolute;
+    right: 0;
+  }
+}
 
+.mamaHead {
+  width: 50%;
+  height: 80px;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  img {
+    position: absolute;
+    left: 0;
+  }
+}
+
+.bigbig-Container {
+  width: 80px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
 }
 
 img {

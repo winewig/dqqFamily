@@ -1,12 +1,14 @@
 <dqq-navigation-bar></dqq-navigation-bar>
 
-<div [@mamaHead]="'toCenter'" class="img">
-  <img src="../../../assets/main-page/jingjinghead.png" alt="Mama">
+<div class="parent-container">
+  <div class="papaHead">
+    <img @papaHead src="../../../assets/main-page/dayuanHead.jpg" alt="Papa">
+  </div>
+  <div class="mamaHead">
+    <img @mamaHead src="../../../assets/main-page/jingjinghead.png" alt="Mama">
+  </div>
 </div>
-<div [@papaHead]="'toCenter'" class="img papaHead">
-  <img src="../../../assets/main-page/dayuanHead.jpg" alt="Papa">
-</div>
-<div class="img">
-  <img src="../../../assets/main-page/bigbighead.jpg" alt="Bigbig">
+<div class="bigbig-Container">
+  <img @imgBottom src="../../../assets/main-page/bigbighead.jpg" alt="Bigbig">
 </div>
 
