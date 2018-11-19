@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {log} from 'util';
 
 @Component({
   selector: 'dqq-navigation-side-bar',
@@ -14,7 +13,7 @@ export class NavigationSideBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    log(this.showNavSidebar);
+    console.log(this.showNavSidebar);
   }
 
 }

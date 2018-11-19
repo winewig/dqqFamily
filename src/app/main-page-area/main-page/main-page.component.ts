@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {animate, sequence, state, style, transition, trigger} from '@angular/animations';
+import {animate, sequence, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'dqq-main-page',
@@ -45,11 +45,11 @@ import {animate, sequence, state, style, transition, trigger} from '@angular/ani
             opacity: 1,
             transform: 'rotateZ(50deg)'
           }),
-          animate('0.5s'),
+          animate('0.8s'),
           style({
             transform: 'rotateZ(-50deg)'
           }),
-          animate('0.5s'),
+          animate('0.8s'),
           style({
             transform: 'scale(2,2)'
           }),

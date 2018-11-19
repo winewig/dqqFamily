@@ -5,6 +5,16 @@
   top: 1.5em;
 }
 
+.nav-side-bar {
+  height: 100%;
+  width: 65%;
+  background-color: aqua;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
 button {
   padding: 0.5em;
   font-family: Arial, serif;
