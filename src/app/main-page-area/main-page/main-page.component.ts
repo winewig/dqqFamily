@@ -45,11 +45,11 @@ import {animate, sequence, state, style, transition, trigger} from '@angular/ani
             opacity: 1,
             transform: 'rotateZ(50deg)'
           }),
-          animate('0.5s'),
+          animate('0.8s linear'),
           style({
             transform: 'rotateZ(-50deg)'
           }),
-          animate('0.5s'),
+          animate('0.8s linear'),
           style({
             transform: 'scale(2,2)'
           }),
