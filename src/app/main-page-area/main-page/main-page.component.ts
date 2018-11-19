@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {animate, sequence, state, style, transition, trigger} from '@angular/animations';
+import {Component} from '@angular/core';
+import {animate, keyframes, sequence, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'dqq-main-page',
@@ -43,28 +43,23 @@ import {animate, sequence, state, style, transition, trigger} from '@angular/ani
           animate('2s 2s'),
           style({
             opacity: 1,
-            transform: 'rotateZ(50deg)'
+            transform: 'rotateZ(0deg)'
           }),
-          animate('0.8s linear'),
-          style({
-            transform: 'rotateZ(-50deg)'
-          }),
-          animate('0.8s linear'),
-          style({
-            transform: 'scale(2,2)'
-          }),
-          animate('1s')
+          animate('1.5s', keyframes([
+            style({transform: 'rotateZ(30deg)', offset: 0.143}),
+            style({transform: 'rotateZ(-30deg)', offset: 0.428}),
+            style({transform: 'rotateZ(15deg)', offset: 0.714}),
+            style({transform: 'rotateZ(-15deg)', offset: 1}),
+          ])),
+          animate('3s', keyframes([
+            style({transform: 'scale(1.8, 1.8)', offset: 0.5}),
+            style({transform: 'scale(1,1)', offset: 0.51}),
+            style({transform: 'scale(1.5, 1.5)', offset: 1}),
+          ])),
         ])
       )
     ])
   ]
 })
-export class MainPageComponent implements OnInit {
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
+export class MainPageComponent {
 }
