@@ -1,0 +1,22 @@
+:host {
+  color: white
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+
+  li:hover {
+    cursor: pointer;
+    color: #607D8B;
+  }
+  li:active {
+    transform: translate(2px, 2px);
+  }
+}
+
+
+
+.active {
+  transform: translateY(2px);
+}

@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'dqq-navigation-side-bar',
@@ -9,11 +10,15 @@ export class NavigationSideBarComponent implements OnInit {
   @Input()
   showNavSidebar;
 
-  constructor() {
+
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
-    console.log(this.showNavSidebar);
+  }
+
+  onGoToThirteenMonth() {
+    this.router.navigate(['/13month']);
   }
 
 }
