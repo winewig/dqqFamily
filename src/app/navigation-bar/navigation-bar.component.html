@@ -1,6 +1,6 @@
 <div class="nav-button-area">
-  <button (click)="showNavSidebar = !showNavSidebar">导航栏</button>
+  <button (click)="openNavigationSideBar()">导航栏</button>
 </div>
-<div *ngIf="showNavSidebar" class="nav-side-bar">
-  <dqq-navigation-side-bar [showNavSidebar]="showNavSidebar"></dqq-navigation-side-bar>
+<div *ngIf="showNavSidebar$ | async" class="nav-side-bar">
+  <dqq-navigation-side-bar></dqq-navigation-side-bar>
 </div>
