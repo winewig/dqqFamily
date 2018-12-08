@@ -18,8 +18,8 @@ export class NavigationBarComponent implements OnInit {
     this.showNavSidebar$ = this.navigationBarService.getNavigationSideBar();
   }
 
-  openNavigationSideBar() {
-    this.navigationBarService.setNavigationSideBar(true);
+  toggleNavigationSideBar() {
+    this.navigationBarService.toggleNavigationSideBar();
   }
 
 }

@@ -1,17 +1,28 @@
 :host {
-  color: white
+  color: #eee4ff;
+  font-size: 1.2em;
+
+  :first-child {
+    margin-top: 5px;
+  }
 }
 
 ul {
+  margin: 0;
   list-style-type: none;
   padding-left: 0;
+  //color: #cd9d38;
 
-  li:hover {
-    cursor: pointer;
-    color: #607D8B;
-  }
-  li:active {
-    transform: translate(2px, 2px);
+  li {
+    padding-left: 1em;
+
+    li:hover {
+      cursor: pointer;
+      color: #607D8B;
+    }
+    li:active {
+      transform: translate(2px, 2px);
+    }
   }
 }
 

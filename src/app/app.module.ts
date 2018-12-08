@@ -6,6 +6,8 @@ import {MainPageAreaModule} from './main-page-area/main-page-area.module';
 import {AppRouting} from './app-routing.module';
 import {MainModule} from './main/main.module';
 import {NavigationModule} from './navigation-bar/navigation.module';
+import {PageNotFoundModule} from './page-not-found/page-not-found.module';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import {NavigationModule} from './navigation-bar/navigation.module';
     MainPageAreaModule,
     AppRouting,
     MainModule,
-    NavigationModule
+    NavigationModule,
+    PageNotFoundModule
   ],
   providers: [],
   bootstrap: [AppComponent]

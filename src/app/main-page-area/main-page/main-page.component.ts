@@ -45,7 +45,7 @@ import {animate, keyframes, sequence, style, transition, trigger} from '@angular
             opacity: 1,
             transform: 'rotateZ(0deg)'
           }),
-          animate('1.5s', keyframes([
+          animate('1s', keyframes([
             style({transform: 'rotateZ(30deg)', offset: 0.143}),
             style({transform: 'rotateZ(-30deg)', offset: 0.428}),
             style({transform: 'rotateZ(15deg)', offset: 0.714}),

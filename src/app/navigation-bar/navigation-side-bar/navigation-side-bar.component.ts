@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, RouterModule} from '@angular/router';
+import {Router} from '@angular/router';
 import {NavigationBarService} from '../navigation-bar.service';
 
 @Component({
@@ -16,8 +16,18 @@ export class NavigationSideBarComponent implements OnInit {
   }
 
   onGoToThirteenMonth() {
-    this.router.navigate(['/13month']);
-    this.navigationBarService.setNavigationSideBar(false);
+    this.router.navigate(['/13month']).then(
+      () => this.closeNavigationSidebar()
+    );
   }
 
+  onGoHomepage() {
+    this.router.navigate(['']).then(
+      () => this.closeNavigationSidebar()
+    );
+  }
+
+  closeNavigationSidebar() {
+    this.navigationBarService.setNavigationSideBar(false);
+  }
 }
