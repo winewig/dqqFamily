@@ -8,6 +8,11 @@ import {NavigationBarService} from '../navigation-bar.service';
   styleUrls: ['./navigation-side-bar.component.scss']
 })
 export class NavigationSideBarComponent implements OnInit {
+  private homepage = [''];
+  private firstDayOfThirteenMonth = ['thirteen-month/20180704'];
+  // TODO: Change the correct first day of eight month
+  private firstDayOfEighteenMonth = ['eighteen-month/20181224'];
+
 
   constructor(private router: Router, private navigationBarService: NavigationBarService) {
   }
@@ -16,13 +21,19 @@ export class NavigationSideBarComponent implements OnInit {
   }
 
   onGoToThirteenMonth() {
-    this.router.navigate(['/13month']).then(
-      () => this.closeNavigationSidebar()
-    );
+    this.navigateToPage(this.firstDayOfThirteenMonth);
+  }
+
+  onGoToEighteenMonth() {
+    this.navigateToPage(this.firstDayOfEighteenMonth);
   }
 
   onGoHomepage() {
-    this.router.navigate(['']).then(
+    this.navigateToPage(this.homepage);
+  }
+
+  navigateToPage(page: Array<String>) {
+    this.router.navigate(page).then(
       () => this.closeNavigationSidebar()
     );
   }

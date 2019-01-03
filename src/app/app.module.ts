@@ -7,7 +7,7 @@ import {AppRouting} from './app-routing.module';
 import {MainModule} from './main/main.module';
 import {NavigationModule} from './navigation-bar/navigation.module';
 import {PageNotFoundModule} from './page-not-found/page-not-found.module';
-
+import {PageIndicatorModule} from './page-indicator/page-indicator.module';
 
 @NgModule({
   declarations: [
@@ -16,10 +16,11 @@ import {PageNotFoundModule} from './page-not-found/page-not-found.module';
   imports: [
     BrowserModule,
     MainPageAreaModule,
-    AppRouting,
     MainModule,
+    AppRouting,
     NavigationModule,
-    PageNotFoundModule
+    PageIndicatorModule,
+    PageNotFoundModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
