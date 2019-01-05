@@ -22,9 +22,22 @@ export class OneImageTextBlockImageDirective implements OnInit {
 
   ngOnInit(): void {
     this.display = 'inline-block';
-    this.margin = this.imageDirection === 'horizontal' ? '0 5%' : '0 0 0 10%';
     this.border = '3px solid white';
     this.width = '90%';
+    this.margin = this.imageDirection === 'horizontal' ? '0 5%' : '0 0 0 10%';
+    switch (this.imageDirection) {
+      case 'horizontal-left':
+        this.margin = '0 0 0 10%';
+        break;
+      case 'horizontal-right':
+        this.margin = '0 10% 0 0';
+        break;
+      case 'horizontal':
+        this.margin = '0 5%';
+        break;
+      default:
+        break;
+    }
   }
 
 }

@@ -8,6 +8,7 @@ import {OneImageTextBlockImageDirective} from './one-image-text-block-image.dire
 import {TwoVerticalImagesBlockDirective} from './two-vertical-images-block.directive';
 import {TwoVerticalImagesBlockImageDirective} from './two-vertical-images-block-image.directive';
 import {OneImageTextBlockTextDirective} from './one-image-text-block-text.directive';
+import {PhotoTapDirective} from './photo-tap.directive';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import {OneImageTextBlockTextDirective} from './one-image-text-block-text.direct
     OneImageTextBlockImageDirective,
     TwoVerticalImagesBlockDirective,
     TwoVerticalImagesBlockImageDirective,
-    OneImageTextBlockTextDirective
+    OneImageTextBlockTextDirective,
+    PhotoTapDirective
   ],
   exports: [
     ArticleTitleDirective,
@@ -29,7 +31,8 @@ import {OneImageTextBlockTextDirective} from './one-image-text-block-text.direct
     OneImageTextBlockImageDirective,
     TwoVerticalImagesBlockDirective,
     TwoVerticalImagesBlockImageDirective,
-    OneImageTextBlockTextDirective
+    OneImageTextBlockTextDirective,
+    PhotoTapDirective
   ],
 })
 export class ArticleDirectivesModule { }

@@ -6,5 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dec24.component.scss']
 })
 export class Dec24Component {
-  public imageDirection = 'vertical';
+  public imageTextDirection = 'horizontal-small-left';
+  public imageDirection = 'horizontal';
 }
