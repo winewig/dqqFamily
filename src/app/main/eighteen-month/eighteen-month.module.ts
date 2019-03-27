@@ -11,6 +11,7 @@ import { Dec28Component } from './dec28/dec28.component';
 import { Dec29Component } from './dec29/dec29.component';
 import { Dec30TrainComponent } from './dec30-train/dec30-train.component';
 import { Dec30HotelComponent } from './dec30-hotel/dec30-hotel.component';
+import { Dec31Component } from './dec31/dec31.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { Dec30HotelComponent } from './dec30-hotel/dec30-hotel.component';
     Dec28Component,
     Dec29Component,
     Dec30TrainComponent,
-    Dec30HotelComponent
+    Dec30HotelComponent,
+    Dec31Component
   ]
 })
 
