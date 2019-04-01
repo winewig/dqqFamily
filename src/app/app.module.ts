@@ -7,7 +7,7 @@ import {AppRouting} from './app-routing.module';
 import {MainModule} from './main/main.module';
 import {NavigationModule} from './navigation-bar/navigation.module';
 import {PageNotFoundModule} from './page-not-found/page-not-found.module';
-import {PageIndicatorModule} from './page-indicator/page-indicator.module';
+import {AuthModule} from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -17,9 +17,9 @@ import {PageIndicatorModule} from './page-indicator/page-indicator.module';
     BrowserModule,
     MainPageAreaModule,
     MainModule,
+    AuthModule,
     AppRouting,
     NavigationModule,
-    PageIndicatorModule,
     PageNotFoundModule,
   ],
   providers: [],

@@ -12,6 +12,7 @@ export class NavigationSideBarComponent implements OnInit {
   private firstDayOfThirteenMonth = ['thirteen-month/20180704'];
   // TODO: Change the correct first day of eight month
   private firstDayOfEighteenMonth = ['eighteen-month/20181224'];
+  private financePage = ['finance'];
 
 
   constructor(private router: Router, private navigationBarService: NavigationBarService) {
@@ -30,6 +31,10 @@ export class NavigationSideBarComponent implements OnInit {
 
   onGoHomepage() {
     this.navigateToPage(this.homepage);
+  }
+
+  onGoToFamilyFinance() {
+    this.navigateToPage(this.financePage);
   }
 
   navigateToPage(page: Array<String>) {
