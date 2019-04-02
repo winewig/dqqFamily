@@ -1,3 +1,41 @@
-<p>
-  furniture-priority works!
-</p>
+<div class="priority-tables">
+  <table class="priority-table">
+    <thead>
+      <tr>
+        <th>最高优先级</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let character of characters">
+        <td>{{ character.id }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="priority-table">
+    <thead>
+    <tr>
+      <th>中等优先级</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let character of characters">
+      <td>{{ character.id }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <table class="priority-table">
+    <thead>
+    <tr>
+      <th>低等优先级</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let character of characters">
+      <td>{{ character.id }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

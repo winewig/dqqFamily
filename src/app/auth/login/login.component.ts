@@ -22,7 +22,7 @@ export class LoginComponent implements OnDestroy {
     const userName = this.userName.nativeElement.value;
     const password = this.password.nativeElement.value;
 
-    this.loginSubscription = this.authService.login(userName, password).subscribe(
+    this.loginSubscription = this.authService.login('dqq', '123').subscribe( // TODO change backto userName password
       isLoggedIn => {
         console.log(`The user is logged in: ${isLoggedIn}`);
         if (isLoggedIn) {
