@@ -6,12 +6,19 @@ import { FurniturePriorityComponent } from './furniture-priority/furniture-prior
 import { FurnitureBoughtListComponent } from './furniture-bought-list/furniture-bought-list.component';
 import { FurnitureToBuyListComponent } from './furniture-to-buy-list/furniture-to-buy-list.component';
 import { FinanceComponent } from './finance/finance.component';
+import {ContractSignCancellationComponent} from './contract-sign-cancellation/contract-sign-cancellation.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FinanceRoutingModule
   ],
-  declarations: [FurniturePriorityComponent, FurnitureBoughtListComponent, FurnitureToBuyListComponent, FinanceComponent]
+  declarations: [
+    FurniturePriorityComponent,
+    FurnitureBoughtListComponent,
+    FurnitureToBuyListComponent,
+    FinanceComponent,
+    ContractSignCancellationComponent
+  ]
 })
 export class FinanceModule { }

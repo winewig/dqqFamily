@@ -21,6 +21,8 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "core-js": "^2.5.4",
+    "mongodb-stitch-browser-sdk": "^4.3.2",
+    "mongodb-stitch-browser-services-http": "^4.3.2",
     "rxjs": "~6.2.0",
     "zone.js": "~0.8.26"
   },

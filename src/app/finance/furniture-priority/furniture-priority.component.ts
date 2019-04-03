@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {DbFurniturePriorityService, ToBuyFurniture} from '../finance-services/db-furniture-priority.service';
+
 
 @Component({
   selector: 'dqq-furniture-priority',
@@ -7,11 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FurniturePriorityComponent implements OnInit {
 
-  characters = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}];
+  public highPriorityFurnitures: Promise<ToBuyFurniture[]>;
+  public midPriorityFurnitures: Promise<ToBuyFurniture[]>;
+  public lowPriorityFurnitures: Promise<ToBuyFurniture[]>;
 
-  constructor() { }
+  constructor(private dbFurniturePriorityService: DbFurniturePriorityService) { }
 
   ngOnInit() {
+    this.highPriorityFurnitures = this.dbFurniturePriorityService.callDbHighPriorities();
+    this.midPriorityFurnitures = this.dbFurniturePriorityService.callDbMidPriorities();
+    this.lowPriorityFurnitures = this.dbFurniturePriorityService.callDbLowPriorities();
   }
 
 }

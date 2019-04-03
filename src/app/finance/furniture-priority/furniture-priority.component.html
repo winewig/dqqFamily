@@ -6,8 +6,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let character of characters">
-        <td>{{ character.id }}</td>
+      <tr *ngFor="let highPriorityFurniture of highPriorityFurnitures | async">
+        <td>{{ highPriorityFurniture.content }}</td>
       </tr>
     </tbody>
   </table>
@@ -19,9 +19,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let character of characters">
-      <td>{{ character.id }}</td>
-    </tr>
+      <tr *ngFor="let midPriorityFurniture of midPriorityFurnitures |async">
+        <td>{{ midPriorityFurniture.content }}</td>
+      </tr>
     </tbody>
   </table>
 
@@ -32,9 +32,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let character of characters">
-      <td>{{ character.id }}</td>
-    </tr>
+      <tr *ngFor="let lowPriorityFurniture of lowPriorityFurnitures | async">
+        <td>{{ lowPriorityFurniture.content }}</td>
+      </tr>
     </tbody>
   </table>
 </div>

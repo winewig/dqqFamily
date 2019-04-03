@@ -19,10 +19,10 @@ export class LoginComponent implements OnDestroy {
 
   public userInfoPreCheck() {
 
-    const userName = this.userName.nativeElement.value;
+    const username = this.userName.nativeElement.value;
     const password = this.password.nativeElement.value;
 
-    this.loginSubscription = this.authService.login('dqq', '123').subscribe( // TODO change backto userName password
+    this.loginSubscription = this.authService.login(username, password).subscribe(
       isLoggedIn => {
         console.log(`The user is logged in: ${isLoggedIn}`);
         if (isLoggedIn) {
