@@ -1,3 +1,27 @@
-<p>
-  contract-sign-cancellation works!
-</p>
+<div class="contract-tables">
+  <table class="contract-table">
+    <thead>
+    <tr>
+      <th>解除合同</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let test of tests">
+      <td>{{ test }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <table class="contract-table">
+    <thead>
+    <tr>
+      <th>签约合同</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let test of tests">
+      <td>{{ test }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

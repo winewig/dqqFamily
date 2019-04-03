@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContractSignCancellationComponent implements OnInit {
 
+  public tests = ['ab', 'ac', 'cd'];
+
   constructor() { }
 
   ngOnInit() {
