@@ -20,7 +20,9 @@ export class PageIndicatorComponent {
   constructor(private router: Router) {}
 
   findIndexOfActivatedUrl() {
-    this.config = this.router.config.slice(0, this.router.config.length - 2);
+    // TODO: this.config here is a hack, need to be changed.
+    // Remove 3 Routes from the whole route: login, main-page-area, page-not-found.
+    this.config = this.router.config.slice(0, this.router.config.length - 3);
     this.activatedUrl = this.router.url.substring(1);
     this.articleLength = this.config.length;
     this.activatedUrlIndex = this.config.findIndex(ele => this.activatedUrl === ele.path);

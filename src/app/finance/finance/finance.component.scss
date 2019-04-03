@@ -1,0 +1,30 @@
+.title {
+  margin: 30px 0 0 18px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.menu {
+
+  ul {
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+
+    li {
+      display: inline-block;
+      padding: 5px 5px;
+      background-color: #dfeeec;
+      border-radius: 10px 70px 2px 10px;
+      list-style-type: none;
+
+      a {
+        text-decoration: none;
+        color: #52568b;
+      }
+    }
+  }
+}
+
+nav ul li a.tabActive {
+  color: #4910ee;
+}
