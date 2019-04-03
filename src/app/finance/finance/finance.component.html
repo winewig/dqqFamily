@@ -1,0 +1,18 @@
+<h2 class="title">家庭财务</h2>
+<nav class="menu">
+  <ul>
+    <li>
+      <a routerLink="./" routerLinkActive="tabActive" [routerLinkActiveOptions]="{exact: true}">采购优先级</a>
+    </li>
+    <li>
+      <a routerLink="./bought-list" routerLinkActive="tabActive">已购买家具</a>
+    </li>
+    <li>
+      <a routerLink="./to-buy-list" routerLinkActive="tabActive">欲购买清单</a>
+    </li>
+    <li>
+      <a routerLink="./contract-sign-cancellation" routerLinkActive="tabActive">签约解约</a>
+    </li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>

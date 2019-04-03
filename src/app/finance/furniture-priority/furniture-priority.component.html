@@ -1,0 +1,41 @@
+<div class="priority-tables">
+  <table class="priority-table">
+    <thead>
+      <tr>
+        <th>最高优先级</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let highPriorityFurniture of highPriorityFurnitures | async">
+        <td>{{ highPriorityFurniture.content }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="priority-table">
+    <thead>
+    <tr>
+      <th>中等优先级</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let midPriorityFurniture of midPriorityFurnitures |async">
+        <td>{{ midPriorityFurniture.content }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="priority-table">
+    <thead>
+    <tr>
+      <th>低等优先级</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lowPriorityFurniture of lowPriorityFurnitures | async">
+        <td>{{ lowPriorityFurniture.content }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
