@@ -8,10 +8,14 @@
     <tbody>
     <tr *ngFor="let signContractsToDoEntry of signContractsToDoEntries | async; index as index">
       <td dqqLongPress [timeout]="500" (longPressed)="signContractsEntryLongPressed($event)">
-        {{ signContractsToDoEntry }}
+        <span *ngIf="!updateEntrySignContractUpdateInputFieldVisible">{{signContractsToDoEntry}}</span>
+<!--        <span *ngIf="!updateEntrySignContractUpdateInputFieldVisible; else signContractUpdateInputField">{{ signContractsToDoEntry }}</span>-->
+<!--        <ng-template #signContractUpdateInputField>-->
+<!--          <input #updateToDoSignContract (keyup.enter)="updateEntryInSignContract(index, updateToDoSignContract.value)">-->
+<!--        </ng-template>-->
         <span *ngIf="updateRemoveSignContractsVisibility(index)">
           <button>修改</button>
-          <button>删除</button>
+          <button (click)="deleteEntryInSignContract(index)">删除</button>
         </span>
       </td>
     </tr>
@@ -34,7 +38,7 @@
         {{ cancellationContractsToDoEntry }}
         <span *ngIf="updateRemoveCancellationContractsVisibility(index)">
           <button>修改</button>
-          <button>删除</button>
+          <button (click)="deleteEntryInCancellationContract(index)">删除</button>
         </span>
       </td>
     </tr>

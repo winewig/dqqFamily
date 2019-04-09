@@ -1,3 +1,4 @@
+/* tslint:disable:no-trailing-whitespace */
 import { Injectable } from '@angular/core';
 
 import {DbService} from '../../db.service';
@@ -19,11 +20,34 @@ export class DbContractsSignCancellationService {
   }
 
   public insertEntryWithSignContract(content: string) {
-    return this.dbService.insertEntry('contracts', {'name': 'sign', 'content': `${content}`});
+    return this.insertEntryToContract('sign', content);
   }
 
   public insertEntryWithCancellationContract(content: string) {
-    return this.dbService.insertEntry('contracts', {'name': 'cancel', 'content': `${content}`});
+    return this.insertEntryToContract('cancel', content);
   }
 
+  public insertEntryToContract(name: string, content: string) {
+    return this.dbService.insertOneEntry('contracts', {'name': `${name}`, 'content': `${content}`});
+  }
+
+  public deleteEntryInSignContract(content: string) {
+    return this.deleteEntryInContract('sign', content);
+  }
+
+  public deleteEntryInCancellationContract(content: string) {
+    return this.deleteEntryInContract('cancel', content);
+  }
+
+  public deleteEntryInContract(name: string, content: string) {
+    return this.dbService.deleteOneEntry('contracts', {'name': `${name}`, 'content': `${content}`});
+  }
+
+  public updateEntryInContract(oldContent, newContent) {
+    return this.dbService.updateOneEntry(
+      'contracts',
+      {'content': `${oldContent}`},
+      {'content': `${newContent}`}
+    );
+  }
 }

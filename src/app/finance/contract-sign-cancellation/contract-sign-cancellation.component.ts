@@ -13,6 +13,8 @@ export class ContractSignCancellationComponent implements OnInit {
   public signContractsInputVisible = false;
   public cancellationContractsInputVisible = false;
 
+  public updateEntrySignContractUpdateInputFieldVisible = false;
+
   private signContractsToDoList = [];
   private cancellationContractsToDoList = [];
   // tableObject.rowIndex starts with 0, but we have one row for table head.
@@ -125,5 +127,32 @@ export class ContractSignCancellationComponent implements OnInit {
    */
   updateRemoveCancellationContractsVisibility(index: number) {
     return this.updateRemoveCancellationContractsSelectedIndex === index + 1;
+  }
+
+  public deleteEntryInSignContract(index: number) {
+    this.dbContractsService.deleteEntryInSignContract(this.signContractsToDoList[index]).then(
+      allContractsList => {
+        this.setListsFromDatabase(allContractsList);
+        this.signContractsToDoEntries = Promise.resolve(this.signContractsToDoList);
+      }
+    );
+  }
+
+  public deleteEntryInCancellationContract(index: number) {
+    this.dbContractsService.deleteEntryInCancellationContract(this.cancellationContractsToDoList[index]).then(
+      allContractsList => {
+        this.setListsFromDatabase(allContractsList);
+        this.cancellationContractsToDoEntries = Promise.resolve(this.cancellationContractsToDoList);
+      }
+    );
+  }
+
+  public updateEntryInSignContract(index: number, updateToDoSignContract) {
+    this.dbContractsService.updateEntryInContract(this.signContractsToDoList[index], null).then(
+      allContractsList => {
+        this.setListsFromDatabase(allContractsList);
+        this.signContractsToDoEntries = Promise.resolve(this.signContractsToDoList);
+      }
+    );
   }
 }
