@@ -2,26 +2,47 @@
   <table class="contract-table">
     <thead>
     <tr>
-      <th>解除合同</th>
+      <th>签约合同 <button (click)="openInputForSignContracts()">+</button> </th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let test of tests">
-      <td>{{ test }}</td>
+    <tr *ngFor="let signContractsToDoEntry of signContractsToDoEntries | async; index as index">
+      <td dqqLongPress [timeout]="500" (longPressed)="signContractsEntryLongPressed($event)">
+        {{ signContractsToDoEntry }}
+        <span *ngIf="updateRemoveSignContractsVisibility(index)">
+          <button>修改</button>
+          <button>删除</button>
+        </span>
+      </td>
     </tr>
+    <div *ngIf="signContractsInputVisible">
+      <input #newToDoSignContract (keyup.enter)="addToDoForSignContracts(newToDoSignContract.value)" autofocus>
+      <button (click)="addToDoForSignContracts(newToDoSignContract.value)">保存</button>
+    </div>
     </tbody>
   </table>
 
   <table class="contract-table">
     <thead>
     <tr>
-      <th>签约合同</th>
+      <th>解除合同 <button (click)="openInputForCancellationContracts()">+</button></th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let test of tests">
-      <td>{{ test }}</td>
+    <tr *ngFor="let cancellationContractsToDoEntry of cancellationContractsToDoEntries | async; index as index">
+      <td dqqLongPress [timeout]="500" (longPressed)="cancellationContractsEntryLongPressed($event)">
+        {{ cancellationContractsToDoEntry }}
+        <span *ngIf="updateRemoveCancellationContractsVisibility(index)">
+          <button>修改</button>
+          <button>删除</button>
+        </span>
+      </td>
     </tr>
+    <div *ngIf="cancellationContractsInputVisible">
+      <input #newToDoCancellationContract
+             (keyup.enter)="addToDoForCancellationContracts(newToDoCancellationContract.value)" autofocus>
+      <button (click)="addToDoForCancellationContracts(newToDoCancellationContract.value)">保存</button>
+    </div>
     </tbody>
   </table>
 </div>

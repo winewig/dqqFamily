@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
+import {DbService} from '../../db.service';
 
-import {Stitch, AnonymousCredential, StitchUser} from 'mongodb-stitch-browser-sdk';
-
-export const client = Stitch.initializeDefaultAppClient('dqq-gscai');
 export interface ToBuyFurniture {
   priority: string;
   content: string;
@@ -14,31 +12,17 @@ export interface ToBuyFurniture {
 })
 export class DbFurniturePriorityService {
 
-  constructor() {
-    // this.userLogin().then(
-    //   user => {
-    //     console.log(`User: ${user}`);
-    //     client.callFunction('allPriorities', []).then(
-    //       result => {
-    //         console.log(`Result: ${JSON.stringify(result)}`);
-    //       }
-    //     );
-    //   });
-  }
-
-  private userLogin(): Promise<StitchUser> {
-    return client.auth.loginWithCredential(new AnonymousCredential());
-  }
+  constructor(private dbService: DbService) {}
 
   public callDbHighPriorities(): Promise<ToBuyFurniture[]> {
-    return client.callFunction('listFurnitureWithHighPriority', []);
+    return this.dbService.callDBFunction('listFurnitureWithHighPriority', []);
   }
 
   public callDbMidPriorities(): Promise<ToBuyFurniture[]> {
-    return client.callFunction('listFurnitureWithMidPriority', []);
+    return this.dbService.callDBFunction('listFurnitureWithMidPriority', []);
   }
 
   public callDbLowPriorities(): Promise<ToBuyFurniture[]> {
-    return client.callFunction('listFurnitureWithLowPriority', []);
+    return this.dbService.callDBFunction('listFurnitureWithLowPriority', []);
   }
 }

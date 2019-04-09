@@ -7,11 +7,13 @@ import { FurnitureBoughtListComponent } from './furniture-bought-list/furniture-
 import { FurnitureToBuyListComponent } from './furniture-to-buy-list/furniture-to-buy-list.component';
 import { FinanceComponent } from './finance/finance.component';
 import {ContractSignCancellationComponent} from './contract-sign-cancellation/contract-sign-cancellation.component';
+import {FinanceDirectiveModule} from './directives/finance-directive.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    FinanceRoutingModule
+    FinanceRoutingModule,
+    FinanceDirectiveModule
   ],
   declarations: [
     FurniturePriorityComponent,

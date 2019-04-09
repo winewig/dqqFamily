@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable, from} from 'rxjs';
 
-import {client} from '../finance/finance-services/db-furniture-priority.service';
-import AnonymousCredential from 'mongodb-stitch-core-sdk/dist/esm/auth/providers/anonymous/AnonymousCredential';
+import {DbService} from '../db.service';
 
 interface User {
   name: string;
@@ -16,8 +15,8 @@ export class AuthService {
   public isLoggedIn = false;
   public redirectUrl: string;
 
-  constructor() {
-    this.connectDB();
+  constructor(private dbService: DbService) {
+    this.dbService.connectDB();
   }
 
   public login(username: string, password: string): Observable<boolean> {
@@ -25,7 +24,6 @@ export class AuthService {
     return from(this.callDbCheckLogin().then(
       usr => {
         const user = usr[0];
-        console.log(JSON.stringify(user));
         this.isLoggedIn = (username === user.name) && (password === user.pwd);
         return this.isLoggedIn;
       }
@@ -36,16 +34,7 @@ export class AuthService {
   // Connect the database to query the username and password.
   // Return a promise with an array from the database, which contains a object for username and password.
   private callDbCheckLogin(): Promise<User[]> {
-    return client.callFunction('checkLogin', []);
+    return this.dbService.callDBFunction('checkLogin', []);
   }
 
-  private connectDB() {
-    client.auth.loginWithCredential(new AnonymousCredential()).then(
-      usr => {
-        console.log(`logged in anonymously as user ${usr.id}`);
-        return Promise.resolve(usr);
-      }
-    );
-  }
-  
 }
