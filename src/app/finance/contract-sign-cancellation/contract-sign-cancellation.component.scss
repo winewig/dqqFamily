@@ -12,6 +12,10 @@
   }
 }
 
+tr:nth-child(even) {
+  background:#CCC;
+}
+
 input {
   margin: 0 5px 0 1px;
 }

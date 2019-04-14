@@ -43,7 +43,7 @@ export class DbContractsSignCancellationService {
     return this.dbService.deleteOneEntry('contracts', {'name': `${name}`, 'content': `${content}`});
   }
 
-  public updateEntryInContract(oldContent, newContent) {
+  public updateEntryInContract(oldContent: string, newContent: string) {
     return this.dbService.updateOneEntry(
       'contracts',
       {'content': `${oldContent}`},

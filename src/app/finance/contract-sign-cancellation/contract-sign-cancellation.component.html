@@ -6,15 +6,19 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let signContractsToDoEntry of signContractsToDoEntries | async; index as index">
-      <td dqqLongPress [timeout]="500" (longPressed)="signContractsEntryLongPressed($event)">
-        <span *ngIf="!updateEntrySignContractUpdateInputFieldVisible">{{signContractsToDoEntry}}</span>
-<!--        <span *ngIf="!updateEntrySignContractUpdateInputFieldVisible; else signContractUpdateInputField">{{ signContractsToDoEntry }}</span>-->
-<!--        <ng-template #signContractUpdateInputField>-->
-<!--          <input #updateToDoSignContract (keyup.enter)="updateEntryInSignContract(index, updateToDoSignContract.value)">-->
-<!--        </ng-template>-->
+    <tr *ngFor="let signContractsToDoEntry of signContractsToDoEntries | async; index as index"
+        dqqLongPress [timeout]="500" (longPressed)="signContractsEntryLongPressed($event)">
+      <td>
+        <span *ngIf="!updateInputFieldInSignContractVisible(index); else signContractUpdateInputField">
+          {{ signContractsToDoEntry }}
+        </span>
+        <ng-template #signContractUpdateInputField>
+          <input #updateToDoSignContract value="{{signContractsToDoEntry}}"
+                 (keyup.enter)="updateEntryInSignContract(index, updateToDoSignContract.value)">
+          <button (click)="updateEntryInSignContract(index, updateToDoSignContract.value)">确认</button>
+        </ng-template>
         <span *ngIf="updateRemoveSignContractsVisibility(index)">
-          <button>修改</button>
+          <button (click)="setInputFieldInSignContractVisibility(true)">修改</button>
           <button (click)="deleteEntryInSignContract(index)">删除</button>
         </span>
       </td>
@@ -35,9 +39,16 @@
     <tbody>
     <tr *ngFor="let cancellationContractsToDoEntry of cancellationContractsToDoEntries | async; index as index">
       <td dqqLongPress [timeout]="500" (longPressed)="cancellationContractsEntryLongPressed($event)">
-        {{ cancellationContractsToDoEntry }}
+        <span *ngIf="!updateInputFieldInCancellationContractVisible(index); else cancellationContractUpdateInputField">
+          {{ cancellationContractsToDoEntry }}
+        </span>
+        <ng-template #cancellationContractUpdateInputField>
+          <input #updateToDoCancellationContract value="{{cancellationContractsToDoEntry}}"
+                 (keyup.enter)="updateEntryInCancellationContract(index, updateToDoCancellationContract.value)">
+          <button (click)="updateEntryInCancellationContract(index, updateToDoCancellationContract.value)">确认</button>
+        </ng-template>
         <span *ngIf="updateRemoveCancellationContractsVisibility(index)">
-          <button>修改</button>
+          <button (click)="setInputFieldInCancellationContractVisibility(true)">修改</button>
           <button (click)="deleteEntryInCancellationContract(index)">删除</button>
         </span>
       </td>

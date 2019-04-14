@@ -1,3 +1,23 @@
-<p>
-  furniture-bought-list works!
-</p>
+<table class="bought-list-table">
+  <thead>
+    <tr>
+      <th>项目</th>
+      <th>金额</th>
+      <button (click)="openInputForANewBoughtEntry()">+</button>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>买了厨房</td>
+      <td>14.000</td>
+    </tr>
+    <tr>
+      <td>静静的新沙发</td>
+      <td>700d</td>
+    </tr>
+    <tr *ngIf="newBoughtEntryInputFieldVisible">
+      <td><input #newBoughtEntryContent autofocus></td>
+      <td><input #newBoughtEntryAmount  (keyup.enter)="addToBoughtList(newBoughtEntryContent.value, newBoughtEntryAmount.value)" ></td>
+    </tr>
+  </tbody>
+</table>

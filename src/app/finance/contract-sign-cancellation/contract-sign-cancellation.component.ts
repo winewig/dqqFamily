@@ -14,6 +14,7 @@ export class ContractSignCancellationComponent implements OnInit {
   public cancellationContractsInputVisible = false;
 
   public updateEntrySignContractUpdateInputFieldVisible = false;
+  private updateEntryCancellationContractUpdateInputFieldVisible = false;
 
   private signContractsToDoList = [];
   private cancellationContractsToDoList = [];
@@ -22,9 +23,7 @@ export class ContractSignCancellationComponent implements OnInit {
   private updateRemoveSignContractsSelectedIndex = -1;
   private updateRemoveCancellationContractsSelectedIndex = -1;
 
-  constructor(
-    private dbContractsService: DbContractsSignCancellationService
-  ) { }
+  constructor(private dbContractsService: DbContractsSignCancellationService) { }
 
   ngOnInit() {
     this.dbContractsService.callDbContracts().then(
@@ -36,10 +35,16 @@ export class ContractSignCancellationComponent implements OnInit {
     );
   }
 
+  /**
+   * Open the input field for adding a new entry in sign contract
+   */
   public openInputForSignContracts() {
     this.signContractsInputVisible = true;
   }
 
+  /**
+   * Open the input field for adding a new entry in cancellation contract
+   */
   public openInputForCancellationContracts() {
     this.cancellationContractsInputVisible = true;
   }
@@ -117,7 +122,7 @@ export class ContractSignCancellationComponent implements OnInit {
    * @param event long press event
    */
   cancellationContractsEntryLongPressed(event: any) {
-    this.updateRemoveCancellationContractsSelectedIndex = event.target.parentElement.rowIndex;
+    this.updateRemoveCancellationContractsSelectedIndex = event.target.parentElement.parentElement.rowIndex;
   }
 
   /**
@@ -132,6 +137,7 @@ export class ContractSignCancellationComponent implements OnInit {
   public deleteEntryInSignContract(index: number) {
     this.dbContractsService.deleteEntryInSignContract(this.signContractsToDoList[index]).then(
       allContractsList => {
+        this.updateRemoveSignContractsSelectedIndex = -1; // set long press index back
         this.setListsFromDatabase(allContractsList);
         this.signContractsToDoEntries = Promise.resolve(this.signContractsToDoList);
       }
@@ -141,18 +147,50 @@ export class ContractSignCancellationComponent implements OnInit {
   public deleteEntryInCancellationContract(index: number) {
     this.dbContractsService.deleteEntryInCancellationContract(this.cancellationContractsToDoList[index]).then(
       allContractsList => {
+        this.updateRemoveCancellationContractsSelectedIndex = -1; // set long press index back
         this.setListsFromDatabase(allContractsList);
         this.cancellationContractsToDoEntries = Promise.resolve(this.cancellationContractsToDoList);
       }
     );
   }
 
-  public updateEntryInSignContract(index: number, updateToDoSignContract) {
-    this.dbContractsService.updateEntryInContract(this.signContractsToDoList[index], null).then(
+  public updateEntryInSignContract(index: number, updateToDoSignContract: string) {
+    this.dbContractsService.updateEntryInContract(this.signContractsToDoList[index], updateToDoSignContract).then(
       allContractsList => {
+        this.setInputFieldInSignContractVisibility(false);
+        this.updateRemoveSignContractsSelectedIndex = -1;
         this.setListsFromDatabase(allContractsList);
         this.signContractsToDoEntries = Promise.resolve(this.signContractsToDoList);
       }
     );
+  }
+
+  public updateEntryInCancellationContract(index: number, updateToDoCancellationContract: string) {
+    this.dbContractsService.updateEntryInContract(this.cancellationContractsToDoList[index], updateToDoCancellationContract).then(
+      allContractsList => {
+        this.setInputFieldInCancellationContractVisibility(false);
+        this.updateRemoveCancellationContractsSelectedIndex = -1;
+        this.setListsFromDatabase(allContractsList);
+        this.cancellationContractsToDoEntries = Promise.resolve(this.cancellationContractsToDoList);
+      }
+    );
+  }
+
+  public setInputFieldInSignContractVisibility(visibility: boolean) {
+    this.updateEntrySignContractUpdateInputFieldVisible = visibility;
+  }
+
+  public setInputFieldInCancellationContractVisibility(visibility: boolean) {
+    this.updateEntryCancellationContractUpdateInputFieldVisible = visibility;
+  }
+
+  public updateInputFieldInSignContractVisible(index) {
+    return this.updateRemoveSignContractsSelectedIndex === index + 1
+      && this.updateEntrySignContractUpdateInputFieldVisible;
+  }
+
+  public updateInputFieldInCancellationContractVisible(index) {
+    return this.updateRemoveCancellationContractsSelectedIndex === index + 1
+      && this.updateEntryCancellationContractUpdateInputFieldVisible;
   }
 }
