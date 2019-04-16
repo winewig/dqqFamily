@@ -9,26 +9,33 @@ import {BoughtEntry, DbFurnitureBoughtListService} from '../finance-services/db-
 export class FurnitureBoughtListComponent implements OnInit {
   public newBoughtEntryInputFieldVisible = false;
   public boughtList: BoughtEntry[] = [];
+  public boughtEntries: Promise<BoughtEntry[]>;
 
   // new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(number), return string
   constructor(private dbBoughtListService: DbFurnitureBoughtListService) { }
 
   ngOnInit() {
+    this.dbBoughtListService.listAllEntriesOfBoughtList().then(
+      boughtList => {
+        this.boughtEntries = Promise.resolve(boughtList);
+      }
+    );
   }
 
   public openInputForANewBoughtEntry() {
     this.newBoughtEntryInputFieldVisible = true;
   }
 
-  public addToBoughtList(content: string, amount: number) {
+  public addToBoughtList(content: string, amount: string) {
+    const contentAmount = Number(amount);
     // Return, if there is no content or amount not a valid amount
-    if (!!content.length || typeof amount !== 'number' || amount <= 0) {
+    if (!content.length || contentAmount <= 0) {
       return;
     }
-    this.dbBoughtListService.insertEntryToBoughtList(content, amount).then(
+    this.dbBoughtListService.insertEntryToBoughtList(content, contentAmount).then(
       boughtList => {
-        this.boughtList = [];
-        this.boughtList = boughtList;
+        this.newBoughtEntryInputFieldVisible = false;
+        this.boughtEntries = Promise.resolve(boughtList);
       }
     );
   }

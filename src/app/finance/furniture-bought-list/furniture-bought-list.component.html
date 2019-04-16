@@ -7,13 +7,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>买了厨房</td>
-      <td>14.000</td>
+    <tr *ngFor="let boughtEntry of boughtEntries | async">
+      <td>{{boughtEntry.content}}</td>
+      <td>{{boughtEntry.amount}}</td>
     </tr>
     <tr>
-      <td>静静的新沙发</td>
-      <td>700d</td>
+      <td>{{boughtEntries.length | async}}</td>
     </tr>
     <tr *ngIf="newBoughtEntryInputFieldVisible">
       <td><input #newBoughtEntryContent autofocus></td>

@@ -16,7 +16,7 @@ export class DbContractsSignCancellationService {
   constructor(private dbService: DbService) { }
 
   public callDbContracts(): Promise<Contracts[]> {
-    return this.dbService.callDBFunction('listAllContracts', []);
+    return this.dbService.listAllEntries('contracts');
   }
 
   public insertEntryWithSignContract(content: string) {

@@ -15,6 +15,10 @@ export class DbFurnitureBoughtListService {
 
   constructor(private dbService: DbService) { }
 
+  public listAllEntriesOfBoughtList(): Promise<BoughtEntry[]> {
+    return this.dbService.listAllEntries(furnitureBoughtListCollection);
+  }
+
   public insertEntryToBoughtList(content: string, amount: number) {
     return this.dbService.insertOneEntry(furnitureBoughtListCollection, {'content': `${content}`, 'amount': `${amount}`});
   }

@@ -58,6 +58,15 @@ export class DbService {
     return this.callDBFunction('updateOneDocument', [collectionName, filter, content]);
   }
 
+  /**
+   * Require all entries of a collection
+   * Return a promise with the whole entries of the collection
+   * @param collectionName the name of the collection
+   */
+  public listAllEntries(collectionName: string) {
+    return this.callDBFunction('listAllEntries', [collectionName]);
+  }
+
 
   /**
    * Call database function
