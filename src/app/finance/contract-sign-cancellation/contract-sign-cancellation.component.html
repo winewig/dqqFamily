@@ -2,26 +2,62 @@
   <table class="contract-table">
     <thead>
     <tr>
-      <th>解除合同</th>
+      <th>签约合同 <button (click)="openInputForSignContracts()">+</button> </th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let test of tests">
-      <td>{{ test }}</td>
+    <tr *ngFor="let signContractsToDoEntry of signContractsToDoEntries | async; index as index"
+        dqqLongPress [timeout]="500" (longPressed)="signContractsEntryLongPressed($event)">
+      <td>
+        <span *ngIf="!updateInputFieldInSignContractVisible(index); else signContractUpdateInputField">
+          {{ signContractsToDoEntry }}
+        </span>
+        <ng-template #signContractUpdateInputField>
+          <input #updateToDoSignContract value="{{signContractsToDoEntry}}"
+                 (keyup.enter)="updateEntryInSignContract(index, updateToDoSignContract.value)">
+          <button (click)="updateEntryInSignContract(index, updateToDoSignContract.value)">确认</button>
+        </ng-template>
+        <span *ngIf="updateRemoveSignContractsVisibility(index)">
+          <button (click)="setInputFieldInSignContractVisibility(true)">修改</button>
+          <button (click)="deleteEntryInSignContract(index)">删除</button>
+        </span>
+      </td>
     </tr>
+    <div *ngIf="signContractsInputVisible">
+      <input #newToDoSignContract (keyup.enter)="addToDoForSignContracts(newToDoSignContract.value)" autofocus>
+      <button (click)="addToDoForSignContracts(newToDoSignContract.value)">保存</button>
+    </div>
     </tbody>
   </table>
 
   <table class="contract-table">
     <thead>
     <tr>
-      <th>签约合同</th>
+      <th>解除合同 <button (click)="openInputForCancellationContracts()">+</button></th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let test of tests">
-      <td>{{ test }}</td>
+    <tr *ngFor="let cancellationContractsToDoEntry of cancellationContractsToDoEntries | async; index as index">
+      <td dqqLongPress [timeout]="500" (longPressed)="cancellationContractsEntryLongPressed($event)">
+        <span *ngIf="!updateInputFieldInCancellationContractVisible(index); else cancellationContractUpdateInputField">
+          {{ cancellationContractsToDoEntry }}
+        </span>
+        <ng-template #cancellationContractUpdateInputField>
+          <input #updateToDoCancellationContract value="{{cancellationContractsToDoEntry}}"
+                 (keyup.enter)="updateEntryInCancellationContract(index, updateToDoCancellationContract.value)">
+          <button (click)="updateEntryInCancellationContract(index, updateToDoCancellationContract.value)">确认</button>
+        </ng-template>
+        <span *ngIf="updateRemoveCancellationContractsVisibility(index)">
+          <button (click)="setInputFieldInCancellationContractVisibility(true)">修改</button>
+          <button (click)="deleteEntryInCancellationContract(index)">删除</button>
+        </span>
+      </td>
     </tr>
+    <div *ngIf="cancellationContractsInputVisible">
+      <input #newToDoCancellationContract
+             (keyup.enter)="addToDoForCancellationContracts(newToDoCancellationContract.value)" autofocus>
+      <button (click)="addToDoForCancellationContracts(newToDoCancellationContract.value)">保存</button>
+    </div>
     </tbody>
   </table>
 </div>

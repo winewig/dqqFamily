@@ -5,5 +5,24 @@
 .contract-table thead tr th {
   text-align: left;
   border-bottom: #00000f solid 1px;
+
+  tbody tr {
+    height: 26px;
+  }
+
+  button {
+    margin-left: 15px;
+    margin-bottom: 5px;
+  }
 }
+
+tr:nth-child(even) {
+  background:#CCC;
+}
+
+input {
+  margin: 0 5px 0 1px;
+}
+
+
 
