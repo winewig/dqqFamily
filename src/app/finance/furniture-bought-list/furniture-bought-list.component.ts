@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BoughtEntry, DbFurnitureBoughtListService} from '../finance-services/db-furniture-bought-list.service';
 
 @Component({
@@ -10,6 +10,9 @@ export class FurnitureBoughtListComponent implements OnInit {
   public newBoughtEntryInputFieldVisible = false;
   public boughtList: BoughtEntry[] = [];
   public boughtEntries: Promise<BoughtEntry[]>;
+  public boughtEntriesLength: Promise<number>;
+  public boughtEntriesSum: Promise<number>;
+  private updateRemoveBoughtListSelectedIndex = -1;
 
   // new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(number), return string
   constructor(private dbBoughtListService: DbFurnitureBoughtListService) { }
@@ -17,9 +20,24 @@ export class FurnitureBoughtListComponent implements OnInit {
   ngOnInit() {
     this.dbBoughtListService.listAllEntriesOfBoughtList().then(
       boughtList => {
-        this.boughtEntries = Promise.resolve(boughtList);
+        this.listUpdate(boughtList);
       }
     );
+  }
+
+  public amountSum(boughtList: BoughtEntry[] ): number {
+    let amountSum = 0;
+    for (let i = 0; i < boughtList.length; i++) {
+      amountSum += Number(boughtList[i].amount);
+    }
+    return amountSum;
+  }
+
+  public listUpdate(boughtList: BoughtEntry[]) {
+    this.boughtList = boughtList;
+    this.boughtEntries = Promise.resolve(boughtList);
+    this.boughtEntriesLength = Promise.resolve(boughtList.length);
+    this.boughtEntriesSum = Promise.resolve(this.amountSum(boughtList));
   }
 
   public openInputForANewBoughtEntry() {
@@ -35,7 +53,24 @@ export class FurnitureBoughtListComponent implements OnInit {
     this.dbBoughtListService.insertEntryToBoughtList(content, contentAmount).then(
       boughtList => {
         this.newBoughtEntryInputFieldVisible = false;
-        this.boughtEntries = Promise.resolve(boughtList);
+        this.listUpdate(boughtList);
+      }
+    );
+  }
+
+  public boughtListEntryLongPressed(event: any) {
+    this.updateRemoveBoughtListSelectedIndex = event.target.parentElement.rowIndex - 1;
+  }
+
+  public updateRemoveBoughtListVisibility(index: number): boolean {
+    return this.updateRemoveBoughtListSelectedIndex === index;
+  }
+
+  deleteBoughtListEntry(index: number) {
+    this.dbBoughtListService.deleteEntryInBoughtList(this.boughtList[index]).then(
+      boughtList => {
+        this.updateRemoveBoughtListSelectedIndex = -1;
+        this.listUpdate(boughtList);
       }
     );
   }

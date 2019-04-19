@@ -22,4 +22,8 @@ export class DbFurnitureBoughtListService {
   public insertEntryToBoughtList(content: string, amount: number) {
     return this.dbService.insertOneEntry(furnitureBoughtListCollection, {'content': `${content}`, 'amount': `${amount}`});
   }
+
+  public deleteEntryInBoughtList(boughtEntry: BoughtEntry) {
+    return this.dbService.deleteOneEntry(furnitureBoughtListCollection, boughtEntry);
+  }
 }

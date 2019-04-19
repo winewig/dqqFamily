@@ -7,16 +7,28 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let boughtEntry of boughtEntries | async">
-      <td>{{boughtEntry.content}}</td>
-      <td>{{boughtEntry.amount}}</td>
-    </tr>
-    <tr>
-      <td>{{boughtEntries.length | async}}</td>
+    <tr *ngFor="let boughtEntry of boughtEntries | async; index as index"
+        dqqLongPress [timeout]="500" (longPressed)="boughtListEntryLongPressed($event)">
+      <td style="width: 60%">{{boughtEntry.content}}</td>
+      <td>
+        {{boughtEntry.amount}}
+        <span *ngIf="updateRemoveBoughtListVisibility(index)">
+          <button (click)="deleteBoughtListEntry(index)">删除</button>
+        </span>
+      </td>
     </tr>
     <tr *ngIf="newBoughtEntryInputFieldVisible">
       <td><input #newBoughtEntryContent autofocus></td>
-      <td><input #newBoughtEntryAmount  (keyup.enter)="addToBoughtList(newBoughtEntryContent.value, newBoughtEntryAmount.value)" ></td>
+      <td>
+        <div style="display: inline-block">
+          <input style="width: 40%" #newBoughtEntryAmount  (keyup.enter)="addToBoughtList(newBoughtEntryContent.value, newBoughtEntryAmount.value)">
+          <button (click)="addToBoughtList(newBoughtEntryContent.value, newBoughtEntryAmount.value)">保存</button>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>总数： {{boughtEntriesLength | async}}</td>
+      <td>总计： {{boughtEntriesSum | async}}</td>
     </tr>
   </tbody>
 </table>
