@@ -6,8 +6,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let highPriorityFurniture of highPriorityFurnitures | async">
-        <td>{{ highPriorityFurniture.content }}</td>
+      <tr *ngFor="let highPriorityFurniture of highPriorityFurnitures | async; index as index"
+        dqqLongPress [timeout]="500" (longPressed)="updateHighPriorityFurniture($event, highPriorityFurniture.status)">
+        <td [class.bought]="highPriorityFurniture.status">{{ highPriorityFurniture.content }}</td>
       </tr>
     </tbody>
   </table>

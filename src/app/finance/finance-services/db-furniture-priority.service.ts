@@ -5,6 +5,13 @@ export interface ToBuyFurniture {
   priority: string;
   content: string;
   floor: number;
+  status: boolean;
+}
+
+export enum Priorities {
+  HIGH = 'listFurnitureWithHighPriority',
+  MID = 'listFurnitureWithMidPriority',
+  LOW = 'listFurnitureWithLowPriority'
 }
 
 @Injectable({
@@ -14,15 +21,18 @@ export class DbFurniturePriorityService {
 
   constructor(private dbService: DbService) {}
 
-  public callDbHighPriorities(): Promise<ToBuyFurniture[]> {
-    return this.dbService.callDBFunction('listFurnitureWithHighPriority', []);
+  /**
+   * Return the list entries of the different priority
+   * @param functionName the function name of the database
+   */
+  public callDbPrioritiesFunction(functionName: string): Promise<ToBuyFurniture[]> {
+    return this.dbService.callDBFunction(functionName, []);
   }
 
-  public callDbMidPriorities(): Promise<ToBuyFurniture[]> {
-    return this.dbService.callDBFunction('listFurnitureWithMidPriority', []);
-  }
-
-  public callDbLowPriorities(): Promise<ToBuyFurniture[]> {
-    return this.dbService.callDBFunction('listFurnitureWithLowPriority', []);
+  public updateDbPrioritiesList(content: string, status: boolean): Promise<ToBuyFurniture[]> {
+    return this.dbService.updateOneEntry(
+      'furniturePriority',
+      {'content': `${content}`},
+      {'status': status});
   }
 }

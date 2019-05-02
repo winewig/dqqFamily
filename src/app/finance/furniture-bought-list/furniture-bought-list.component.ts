@@ -11,7 +11,7 @@ export class FurnitureBoughtListComponent implements OnInit {
   public boughtList: BoughtEntry[] = [];
   public boughtEntries: Promise<BoughtEntry[]>;
   public boughtEntriesLength: Promise<number>;
-  public boughtEntriesSum: Promise<number>;
+  public boughtEntriesSum: Promise<string>;
   private updateRemoveBoughtListSelectedIndex = -1;
 
   // new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(number), return string
@@ -37,7 +37,11 @@ export class FurnitureBoughtListComponent implements OnInit {
     this.boughtList = boughtList;
     this.boughtEntries = Promise.resolve(boughtList);
     this.boughtEntriesLength = Promise.resolve(boughtList.length);
-    this.boughtEntriesSum = Promise.resolve(this.amountSum(boughtList));
+    this.boughtEntriesSum = Promise.resolve(this.convertAmountToString(this.amountSum(boughtList)));
+  }
+
+  public convertAmountToString(amount: number): string {
+    return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(amount);
   }
 
   public openInputForANewBoughtEntry() {

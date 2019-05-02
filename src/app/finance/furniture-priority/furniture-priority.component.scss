@@ -12,3 +12,12 @@
   text-align: left;
   border-bottom: #00000f solid 1px;
 }
+
+tbody tr {
+  height: 26px;
+}
+
+.bought {
+  text-decoration-line: line-through;
+  text-decoration-color: #cd2e37;
+}

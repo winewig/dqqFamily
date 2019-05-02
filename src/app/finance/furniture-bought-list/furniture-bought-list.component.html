@@ -11,7 +11,7 @@
         dqqLongPress [timeout]="500" (longPressed)="boughtListEntryLongPressed($event)">
       <td style="width: 60%">{{boughtEntry.content}}</td>
       <td>
-        {{boughtEntry.amount}}
+        {{convertAmountToString(boughtEntry.amount)}}
         <span *ngIf="updateRemoveBoughtListVisibility(index)">
           <button (click)="deleteBoughtListEntry(index)">删除</button>
         </span>
