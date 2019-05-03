@@ -24,6 +24,7 @@
     "mongodb-stitch-browser-sdk": "^4.3.2",
     "mongodb-stitch-browser-services-http": "^4.3.2",
     "rxjs": "~6.2.0",
+    "tar": "^4.4.8",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
