@@ -29,6 +29,11 @@ export class DbFurniturePriorityService {
     return this.dbService.callDBFunction(functionName, []);
   }
 
+  /**
+   * Return the whole list
+   * @param content the unique content, with the content the entry will be found
+   * @param status update the bought status
+   */
   public updateDbPrioritiesList(content: string, status: boolean): Promise<ToBuyFurniture[]> {
     return this.dbService.updateOneEntry(
       'furniturePriority',

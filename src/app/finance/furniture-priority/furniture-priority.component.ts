@@ -12,9 +12,11 @@ export class FurniturePriorityComponent implements OnInit {
   public highPriorityFurnitures: Promise<ToBuyFurniture[]>;
   public midPriorityFurnitures: Promise<ToBuyFurniture[]>;
   public lowPriorityFurnitures: Promise<ToBuyFurniture[]>;
-  private highPriorityFurnitureListIndex = -1;
+  public Priorities: typeof Priorities = Priorities;
+  // private highPriorityFurnitureListIndex = -1;
 
-  constructor(private dbFurniturePriorityService: DbFurniturePriorityService) { }
+
+constructor(private dbFurniturePriorityService: DbFurniturePriorityService) { }
 
   ngOnInit() {
     this.highPriorityFurnitures = this.dbFurniturePriorityService.callDbPrioritiesFunction(Priorities.HIGH);
@@ -22,11 +24,26 @@ export class FurniturePriorityComponent implements OnInit {
     this.lowPriorityFurnitures = this.dbFurniturePriorityService.callDbPrioritiesFunction(Priorities.LOW);
   }
 
-  public updateHighPriorityFurniture(event: any, status: boolean) {
+  public updatePriorityFurniture(event: any, status: boolean) {
     const content = event.target.parentElement.innerText;
-    this.highPriorityFurnitureListIndex = event.target.parentElement.rowIndex - 1;
-    this.dbFurniturePriorityService.updateDbPrioritiesList(content, !status).then(
-      () => this.highPriorityFurnitures = this.dbFurniturePriorityService.callDbPrioritiesFunction(Priorities.HIGH)
+    return this.dbFurniturePriorityService.updateDbPrioritiesList(content, !status);
+  }
+
+  public updateHighPriorityFurniture(event: any, status: boolean, priorityList: Priorities) {
+    this.updatePriorityFurniture(event, status).then(
+      () => this.highPriorityFurnitures = this.dbFurniturePriorityService.callDbPrioritiesFunction(priorityList)
+    );
+  }
+
+  public updateMidPriorityFurniture(event: any, status: boolean, priorityList: Priorities) {
+    this.updatePriorityFurniture(event, status).then(
+      () => this.midPriorityFurnitures = this.dbFurniturePriorityService.callDbPrioritiesFunction(priorityList)
+    );
+  }
+
+  public updateLowPriorityFurniture(event: any, status: boolean, priorityList: Priorities) {
+    this.updatePriorityFurniture(event, status).then(
+      () => this.lowPriorityFurnitures = this.dbFurniturePriorityService.callDbPrioritiesFunction(priorityList)
     );
   }
 }

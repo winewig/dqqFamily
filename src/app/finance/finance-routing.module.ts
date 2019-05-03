@@ -17,10 +17,10 @@ const routes: Routes = [
         path: '',
         canActivateChild: [AuthGuard],
         children: [
-          {path: 'bought-list', component: FurnitureBoughtListComponent},
+          {path: 'furniture-priority', component: FurniturePriorityComponent},
           {path: 'to-buy-list', component: FurnitureToBuyListComponent},
           {path: 'contract-sign-cancellation', component: ContractSignCancellationComponent},
-          {path: '', component: FurniturePriorityComponent}
+          {path: '', component: FurnitureBoughtListComponent}
         ]
       }
     ]

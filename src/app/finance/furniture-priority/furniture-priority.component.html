@@ -7,7 +7,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let highPriorityFurniture of highPriorityFurnitures | async; index as index"
-        dqqLongPress [timeout]="500" (longPressed)="updateHighPriorityFurniture($event, highPriorityFurniture.status)">
+        dqqLongPress [timeout]="500"
+        (longPressed)="updateHighPriorityFurniture($event, highPriorityFurniture.status, Priorities.HIGH)">
         <td [class.bought]="highPriorityFurniture.status">{{ highPriorityFurniture.content }}</td>
       </tr>
     </tbody>
@@ -20,8 +21,10 @@
     </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let midPriorityFurniture of midPriorityFurnitures |async">
-        <td>{{ midPriorityFurniture.content }}</td>
+      <tr *ngFor="let midPriorityFurniture of midPriorityFurnitures |async"
+          dqqLongPress [timeout]="500"
+          (longPressed)="updateMidPriorityFurniture($event, midPriorityFurniture.status, Priorities.MID)">
+        <td [class.bought]="midPriorityFurniture.status">{{ midPriorityFurniture.content }}</td>
       </tr>
     </tbody>
   </table>
@@ -33,7 +36,9 @@
     </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let lowPriorityFurniture of lowPriorityFurnitures | async">
+      <tr *ngFor="let lowPriorityFurniture of lowPriorityFurnitures | async"
+          dqqLongPress [timeout]="500"
+          (longPressed)="updateLowPriorityFurniture($event, lowPriorityFurniture.status, Priorities.LOW)">
         <td>{{ lowPriorityFurniture.content }}</td>
       </tr>
     </tbody>
