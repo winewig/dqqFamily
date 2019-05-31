@@ -7,7 +7,7 @@ import {BoughtEntry, DbFurnitureBoughtListService} from '../finance-services/db-
   styleUrls: ['./furniture-bought-list.component.scss']
 })
 export class FurnitureBoughtListComponent implements OnInit {
-  public newBoughtEntryInputFieldVisible = false;
+  public newBoughtEntryInputFieldVisible = false; // change to a Input variable
   public boughtList: BoughtEntry[] = [];
   public boughtEntries: Promise<BoughtEntry[]>;
   public boughtEntriesLength: Promise<number>;
@@ -44,7 +44,7 @@ export class FurnitureBoughtListComponent implements OnInit {
     return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(amount);
   }
 
-  public openInputForANewBoughtEntry() {
+  public openInputForANewBoughtEntry() { // openInputForANewEntry()
     this.newBoughtEntryInputFieldVisible = true;
   }
 
