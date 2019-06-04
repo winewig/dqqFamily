@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import {DbService} from '../../db.service';
-
-const appointmentCollection = 'appointments';
+import {DbCollections, DbService} from '../../db.service';
 
 export interface AppointmentsEntry {
-  date: any; // maybe date type
+  date: any;
   content: string;
   importance: string;
 }
@@ -16,11 +14,13 @@ export class DbAppointmentsService {
 
   constructor(private dbService: DbService) { }
 
-  public listAllAppointments(): Promise<AppointmentsEntry[]> {
-    return this.dbService.listAllEntries(appointmentCollection);
+  public listAllAppointments(sortByKey: string, sortByValue: number): Promise<AppointmentsEntry[]> {
+    return this.dbService.listAllEntriesSort(DbCollections.APPOINTMENT, sortByKey, sortByValue);
   }
 
-  public insertNewAppointment(date: any, content: string) {
-    return this.dbService.insertOneEntry(appointmentCollection, {'date': `${date}`, 'content': `${content}`, 'importance': 'low'});
+  public insertNewAppointment(date: any, content: string, sortByKey: string, sortByValue: number) {
+    return this.dbService.insertOneEntrySort(
+      DbCollections.APPOINTMENT, {'date': `${date}`, 'content': `${content}`,
+        'importance': 'low'}, sortByKey , sortByValue);
   }
 }

@@ -6,6 +6,22 @@ import AnonymousCredential from 'mongodb-stitch-core-sdk/dist/esm/auth/providers
 
 export const client = Stitch.initializeDefaultAppClient('dqq-gscai');
 
+export enum DbCollections {
+  APPOINTMENT = 'appointments',
+  FURNITUREBOUGHTLIST = 'furnitureBoughtList',
+  CONTRACTS = 'contracts',
+  FURNITUREPRIORITY = 'furniturePriority'
+}
+
+export enum SortSpecifyKey {
+  DATE = 'date'
+}
+
+export const SortSpecifyType = {
+  ASCENDING: 1,
+  DESCENDING: -1
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -33,7 +49,12 @@ export class DbService {
    * @param content the document to be inserted
    */
   public insertOneEntry(collectionName: string, content: any) {
-    return this.callDBFunction('insertOneDocument', [collectionName, content]);
+    return this.insertOneEntrySort(collectionName, content, '', SortSpecifyType.ASCENDING);
+    // return this.callDBFunction('insertOneDocument', [collectionName, content]);
+  }
+
+  public insertOneEntrySort(collectionName: string, content: any, sortByKey: string, sortByValue: number) {
+    return this. callDBFunction('insertOneDocument', [collectionName, content, sortByKey, sortByValue]);
   }
 
 
@@ -64,7 +85,18 @@ export class DbService {
    * @param collectionName the name of the collection
    */
   public listAllEntries(collectionName: string) {
-    return this.callDBFunction('listAllEntries', [collectionName]);
+    return this.listAllEntriesSort(collectionName, '', SortSpecifyType.ASCENDING);
+  }
+
+  /**
+   * Require all entries of a collection sort by a key according the value
+   * It a extension of listAllEntries function
+   * @param collectionName the name of the collection
+   * @param sortByKey according the key the entries will be sort
+   * @param sortByValue the value of the key, how to sort
+   */
+  public listAllEntriesSort(collectionName: string, sortByKey: string, sortByValue: number) {
+    return this.callDBFunction('listAllEntries', [collectionName, sortByKey, sortByValue]);
   }
 
 

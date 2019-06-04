@@ -1,7 +1,7 @@
 /* tslint:disable:no-trailing-whitespace */
 import { Injectable } from '@angular/core';
 
-import {DbService} from '../../db.service';
+import {DbCollections, DbService} from '../../db.service';
 
 export interface Contracts {
   name: string;
@@ -16,7 +16,7 @@ export class DbContractsSignCancellationService {
   constructor(private dbService: DbService) { }
 
   public callDbContracts(): Promise<Contracts[]> {
-    return this.dbService.listAllEntries('contracts');
+    return this.dbService.listAllEntries(DbCollections.CONTRACTS);
   }
 
   public insertEntryWithSignContract(content: string) {
@@ -28,7 +28,7 @@ export class DbContractsSignCancellationService {
   }
 
   public insertEntryToContract(name: string, content: string) {
-    return this.dbService.insertOneEntry('contracts', {'name': `${name}`, 'content': `${content}`});
+    return this.dbService.insertOneEntry(DbCollections.CONTRACTS, {'name': `${name}`, 'content': `${content}`});
   }
 
   public deleteEntryInSignContract(content: string) {
@@ -40,12 +40,12 @@ export class DbContractsSignCancellationService {
   }
 
   public deleteEntryInContract(name: string, content: string) {
-    return this.dbService.deleteOneEntry('contracts', {'name': `${name}`, 'content': `${content}`});
+    return this.dbService.deleteOneEntry(DbCollections.CONTRACTS, {'name': `${name}`, 'content': `${content}`});
   }
 
   public updateEntryInContract(oldContent: string, newContent: string) {
     return this.dbService.updateOneEntry(
-      'contracts',
+      DbCollections.CONTRACTS,
       {'content': `${oldContent}`},
       {'content': `${newContent}`}
     );

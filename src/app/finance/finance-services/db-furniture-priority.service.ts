@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {DbService} from '../../db.service';
+import {DbCollections, DbService} from '../../db.service';
 
 export interface ToBuyFurniture {
   priority: string;
@@ -36,7 +36,7 @@ export class DbFurniturePriorityService {
    */
   public updateDbPrioritiesList(content: string, status: boolean): Promise<ToBuyFurniture[]> {
     return this.dbService.updateOneEntry(
-      'furniturePriority',
+      DbCollections.FURNITUREPRIORITY,
       {'content': `${content}`},
       {'status': status});
   }

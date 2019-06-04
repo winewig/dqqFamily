@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AppointmentsEntry, DbAppointmentsService} from '../finance-services/db-appointments.service';
+import {SortSpecifyKey, SortSpecifyType} from '../../db.service';
 
 @Component({
   selector: 'dqq-furniture-to-buy-list',
@@ -18,7 +19,7 @@ export class FurnitureToBuyListComponent implements OnInit {
   constructor( private dbAppointmentsService: DbAppointmentsService) { }
 
   ngOnInit() {
-    this.appointmentEntries = this.dbAppointmentsService.listAllAppointments();
+    this.appointmentEntries = this.dbAppointmentsService.listAllAppointments(SortSpecifyKey.DATE, SortSpecifyType.ASCENDING);
   }
 
   public openInputForANewAppointmentEntry() { // openInputForANewEntry()
@@ -38,13 +39,11 @@ export class FurnitureToBuyListComponent implements OnInit {
   }
 
   public addToAppointmentsList(date: any, content: string) {
-    // Get the format 2019-05-31T15:11, Date.parse(string)
-    // https://stackoverflow.com/questions/31071999/date-comparison-in-mongodb
-    console.log(`date ist: ${date}, and content is: ${content}`);
-    this.dbAppointmentsService.insertNewAppointment(date, content)
-      .then( appointmentEntries => {
-        this.newAppointmentInputFieldVisible = false;
-        this.appointmentEntries = Promise.resolve(appointmentEntries);
-      });
+    if (!content) {
+      return;
+    }
+    this.appointmentEntries = this.dbAppointmentsService.insertNewAppointment(
+      date, content, SortSpecifyKey.DATE, SortSpecifyType.ASCENDING);
+    this.newAppointmentInputFieldVisible = false;
   }
 }
