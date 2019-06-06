@@ -1,8 +1,8 @@
 <table class="appointment-list-table">
   <thead>
   <tr>
-    <th>日期</th>
-    <th>内容</th>
+    <th class="table-column-date">日期</th>
+    <th class="table-column-content">内容</th>
     <button (click)="openInputForANewAppointmentEntry()">+</button>
   </tr>
   </thead>
@@ -13,7 +13,7 @@
       {{appointmentEntry.date | date:'dd/MM/yyyy'}}
       {{appointmentEntry.date | date:'HH:mm'}}
       <br>
-      {{appointmentEntry.date | date:'EEEE'}}
+      {{appointmentEntry.date | date:'EEEE' | dateFormat}}
     </td>
     <td>
       {{appointmentEntry.content}}
@@ -23,8 +23,8 @@
     </td>
   </tr>
   <tr *ngIf="newAppointmentInputFieldVisible">
-    <td><input type="datetime-local" [value]="currentDate" #newAppointmentEntryDate autofocus></td>
-    <td>
+    <td class="table-column-date"><input type="datetime-local" [value]="currentDate" #newAppointmentEntryDate autofocus></td>
+    <td class="table-column-content">
       <div style="display: inline-block">
         <input style="max-width: 70%" #newAppointmentEntryContent
                (keyup.enter)="addToAppointmentsList(newAppointmentEntryDate.value, newAppointmentEntryContent.value)">

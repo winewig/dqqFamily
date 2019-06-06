@@ -8,6 +8,7 @@ import { FurnitureToBuyListComponent } from './furniture-to-buy-list/furniture-t
 import { FinanceComponent } from './finance/finance.component';
 import {ContractSignCancellationComponent} from './contract-sign-cancellation/contract-sign-cancellation.component';
 import {FinanceDirectiveModule} from './directives/finance-directive.module';
+import { DateFormatPipe } from './pipes/date-format.pipe';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import {FinanceDirectiveModule} from './directives/finance-directive.module';
     FurnitureBoughtListComponent,
     FurnitureToBuyListComponent,
     FinanceComponent,
-    ContractSignCancellationComponent
+    ContractSignCancellationComponent,
+    DateFormatPipe
   ]
 })
 export class FinanceModule { }

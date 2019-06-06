@@ -1,6 +1,7 @@
 .appointment-list-table {
   padding: 5px 2%;
   width: 100%;
+  table-layout: auto;
 
   thead tr th {
     text-align: left;
@@ -15,4 +16,12 @@
     //margin: 3px 5px 0 1px;
     margin: 5px 3px 0 1px;
   }
+}
+
+.table-column-date {
+  width: 40%;
+}
+
+.table-column-content {
+  width: 55%;
 }
