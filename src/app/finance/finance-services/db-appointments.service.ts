@@ -23,4 +23,15 @@ export class DbAppointmentsService {
       DbCollections.APPOINTMENT, {'date': `${date}`, 'content': `${content}`,
         'importance': 'low'}, sortByKey , sortByValue);
   }
+
+  public deleteOneAppointment(content: string, sortByKey: string, sortByValue: number) {
+    return this.dbService.deleteOneEntrySort(
+      DbCollections.APPOINTMENT, {'content': content}, sortByKey, sortByValue
+    );
+  }
+
+  public updateOneAppointment(oldContent: any, newContent: any, sortByKey: string, sortByValue: number) {
+    return this.dbService.updateOneEntrySort(
+      DbCollections.APPOINTMENT, oldContent, newContent, sortByKey, sortByValue);
+  }
 }
