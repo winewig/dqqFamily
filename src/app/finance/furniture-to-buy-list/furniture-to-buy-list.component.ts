@@ -10,6 +10,13 @@ import {SortSpecifyKey, SortSpecifyType} from '../../db.service';
 export class FurnitureToBuyListComponent implements OnInit {
   public newAppointmentInputFieldVisible = false; // change to a Input variable
   public appointmentEntries: Promise<AppointmentsEntry[]>;
+  public updateRemoveAppointmentSelectedIndex = -1;
+  public openAppointmentEditMode = false;
+
+  public changedAppointmentEntryDate: any;
+  public changedAppointmentEntryContent = '';
+
+  private selectedContent = '';
 
   // Calculate the current time to iso, so that it will be shown in datetime-local type
   public get currentDate() {
@@ -27,15 +34,42 @@ export class FurnitureToBuyListComponent implements OnInit {
   }
 
   public appointmentEntryLongPressed(event: any) {
-
+    const trNode = this.nodeFinder(event.target, 'TR');    
+    this.updateRemoveAppointmentSelectedIndex = trNode.rowIndex;
+    this.selectedContent = event.target.innerText;
   }
 
-  updateRemoveAppointmentVisibility(index: number) {
-
+  private nodeFinder(currentNode: HTMLElement, searchNodeName: string) {
+    if ( searchNodeName === currentNode.nodeName) {
+      return currentNode;
+    }
+    return this.nodeFinder(currentNode.parentElement, searchNodeName);
   }
 
-  deleteAppointmentEntry(index: number) {
+  public updateRemoveAppointmentVisibility(index: number) {
+    return this.updateRemoveAppointmentSelectedIndex === index + 1;
+  }
 
+  public deleteAppointmentEntry() {
+    this.updateRemoveAppointmentSelectedIndex = -1;
+    if (!this.selectedContent) {
+      return;
+    }
+    this.appointmentEntries = this.dbAppointmentsService.deleteOneAppointment(
+      this.selectedContent, SortSpecifyKey.DATE, SortSpecifyType.ASCENDING
+    );
+    this.selectedContent = '';
+  }
+
+  public changeAppointmentEntry(appointmentEntry: any) {
+    this.openAppointmentEditMode = true;
+    console.log(appointmentEntry);
+    this.changedAppointmentEntryDate = Date.parse(appointmentEntry.date);
+    this.changedAppointmentEntryContent = appointmentEntry.content;
+  }
+
+  public updateAppointmentEntry(date: any, content: string) {
+    console.log(date, content);    
   }
 
   public addToAppointmentsList(date: any, content: string) {
@@ -45,5 +79,11 @@ export class FurnitureToBuyListComponent implements OnInit {
     this.appointmentEntries = this.dbAppointmentsService.insertNewAppointment(
       date, content, SortSpecifyKey.DATE, SortSpecifyType.ASCENDING);
     this.newAppointmentInputFieldVisible = false;
+  }
+
+  public isAppointmentEditMode(index: number) {
+    const isSelectedIndex = this.updateRemoveAppointmentSelectedIndex === index + 1;
+    // this.updateRemoveAppointmentSelectedIndex = -1;
+    return isSelectedIndex && this.openAppointmentEditMode;
   }
 }

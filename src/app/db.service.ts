@@ -50,11 +50,10 @@ export class DbService {
    */
   public insertOneEntry(collectionName: string, content: any) {
     return this.insertOneEntrySort(collectionName, content, '', SortSpecifyType.ASCENDING);
-    // return this.callDBFunction('insertOneDocument', [collectionName, content]);
   }
 
   public insertOneEntrySort(collectionName: string, content: any, sortByKey: string, sortByValue: number) {
-    return this. callDBFunction('insertOneDocument', [collectionName, content, sortByKey, sortByValue]);
+    return this.callDBFunction('insertOneDocument', [collectionName, content, sortByKey, sortByValue]);
   }
 
 
@@ -62,10 +61,14 @@ export class DbService {
    * Delete one entry from the database collection
    * Return a promise with the new collection
    * @param collectionName the collection of the database
-   * @param content the document to be deleted
+   * @param content the document to be deleted, should be an object
    */
   public deleteOneEntry(collectionName: string, content: any) {
-    return this.callDBFunction('deleteOneDocument', [collectionName, content]);
+    return this.deleteOneEntrySort(collectionName, content, '', SortSpecifyType.ASCENDING);
+  }
+
+  public deleteOneEntrySort(collectionName: string, content: any, sortByKey: string, sortByValue: number) {
+    return this.callDBFunction('deleteOneDocument', [collectionName, content, sortByKey, sortByValue]);
   }
 
   /**
@@ -76,7 +79,11 @@ export class DbService {
    * @param content the field to be updated in the document
    */
   public updateOneEntry(collectionName: string, filter: any, content: any) {
-    return this.callDBFunction('updateOneDocument', [collectionName, filter, content]);
+    return this.updateOneEntrySort(collectionName, filter, content, '', SortSpecifyType.ASCENDING);
+  }
+
+  public updateOneEntrySort(collectionName: string, filter: any, content: any, sortByKey: string, sortByValue: number) {
+    return this.callDBFunction('updateOneDocument', [collectionName, filter, content, sortByKey, sortByValue]);
   }
 
   /**

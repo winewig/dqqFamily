@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { FinanceRoutingModule } from './finance-routing.module';
 import { FurniturePriorityComponent } from './furniture-priority/furniture-priority.component';
@@ -13,6 +14,7 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     FinanceRoutingModule,
     FinanceDirectiveModule
   ],
