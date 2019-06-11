@@ -18,6 +18,7 @@ export class DbAppointmentsService {
     return this.dbService.listAllEntriesSort(DbCollections.APPOINTMENT, sortByKey, sortByValue);
   }
 
+  // By inserting a new document, it has automatically low importance
   public insertNewAppointment(date: any, content: string, sortByKey: string, sortByValue: number) {
     return this.dbService.insertOneEntrySort(
       DbCollections.APPOINTMENT, {'date': `${date}`, 'content': `${content}`,
@@ -30,8 +31,11 @@ export class DbAppointmentsService {
     );
   }
 
-  public updateOneAppointment(oldContent: any, newContent: any, sortByKey: string, sortByValue: number) {
+  // Update is only for date and content, importance maybe will be joined.
+  public updateOneAppointment(oldContent: string, date: string, newContent: string, sortByKey: string, sortByValue: number) {
     return this.dbService.updateOneEntrySort(
-      DbCollections.APPOINTMENT, oldContent, newContent, sortByKey, sortByValue);
+      DbCollections.APPOINTMENT, {'content': oldContent}, {'date': `${date}`, 'content': `${newContent}`},
+      sortByKey, sortByValue
+    );
   }
 }

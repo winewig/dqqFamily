@@ -8,7 +8,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let appointmentEntry of appointmentEntries | async; index as index"
-      dqqLongPress [timeout]="300" (longPressed)="appointmentEntryLongPressed($event)">
+      dqqLongPress [timeout]="500" (longPressed)="appointmentEntryLongPressed($event)">
     <td>
       <div *ngIf="!isAppointmentEditMode(index); else appointmentDateEditMode">
         {{appointmentEntry.date | date:'dd/MM/yyyy'}}
@@ -26,10 +26,10 @@
       </div>
       <ng-template #appointmentContentEditMode>
           <input style="max-width: 70%" [(ngModel)]="changedAppointmentEntryContent"
-          (keyup.enter)="updateAppointmentEntry(changedAppointmentEntryDate, changedAppointmentEntryContent)">
-        <button (click)="updateAppointmentEntry(changedAppointmentEntryDate, changedAppointmentEntryContent)">保存</button>
+          (keyup.enter)="updateAppointmentEntry(changedAppointmentEntryDate, changedAppointmentEntryContent, appointmentEntry.content)">
+        <button (click)="updateAppointmentEntry(changedAppointmentEntryDate, changedAppointmentEntryContent, appointmentEntry.content)">保存</button>
       </ng-template>
-      <div *ngIf="updateRemoveAppointmentVisibility(index)">
+      <div *ngIf="updateRemoveAppointmentVisibility(index, appointmentEntry)">
         <button (click)="changeAppointmentEntry(appointmentEntry)">修改</button>
         <button class="button-delete" (click)="deleteAppointmentEntry()">删除</button>
       </div>

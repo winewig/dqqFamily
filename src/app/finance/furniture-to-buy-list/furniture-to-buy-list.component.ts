@@ -34,7 +34,7 @@ export class FurnitureToBuyListComponent implements OnInit {
   }
 
   public appointmentEntryLongPressed(event: any) {
-    const trNode = this.nodeFinder(event.target, 'TR');    
+    const trNode = this.nodeFinder(event.target, 'TR');
     this.updateRemoveAppointmentSelectedIndex = trNode.rowIndex;
     this.selectedContent = event.target.innerText;
   }
@@ -46,7 +46,9 @@ export class FurnitureToBuyListComponent implements OnInit {
     return this.nodeFinder(currentNode.parentElement, searchNodeName);
   }
 
-  public updateRemoveAppointmentVisibility(index: number) {
+  public updateRemoveAppointmentVisibility(index: number, appointmentEntry: AppointmentsEntry) {
+    this.changedAppointmentEntryDate = appointmentEntry.date;
+    this.changedAppointmentEntryContent = appointmentEntry.content;
     return this.updateRemoveAppointmentSelectedIndex === index + 1;
   }
 
@@ -63,13 +65,14 @@ export class FurnitureToBuyListComponent implements OnInit {
 
   public changeAppointmentEntry(appointmentEntry: any) {
     this.openAppointmentEditMode = true;
-    console.log(appointmentEntry);
-    this.changedAppointmentEntryDate = Date.parse(appointmentEntry.date);
-    this.changedAppointmentEntryContent = appointmentEntry.content;
   }
 
-  public updateAppointmentEntry(date: any, content: string) {
-    console.log(date, content);    
+  public updateAppointmentEntry(date: any, content: string, oldContent: string) {
+    this.appointmentEntries = this.dbAppointmentsService.updateOneAppointment(
+      oldContent, date, content, SortSpecifyKey.DATE, SortSpecifyType.ASCENDING
+    );
+    this.openAppointmentEditMode = false;
+    this.updateRemoveAppointmentSelectedIndex = -1;
   }
 
   public addToAppointmentsList(date: any, content: string) {
