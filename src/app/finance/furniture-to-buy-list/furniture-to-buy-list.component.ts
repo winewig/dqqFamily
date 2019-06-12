@@ -13,8 +13,9 @@ export class FurnitureToBuyListComponent implements OnInit {
   public updateRemoveAppointmentSelectedIndex = -1;
   public openAppointmentEditMode = false;
 
-  public changedAppointmentEntryDate: any;
-  public changedAppointmentEntryContent = '';
+  public toBeChangedAppointmentEntryDate: any;
+  public newChangedAppointmentEntryDate = '';
+  public toBeChangedAppointmentEntryContent = '';
 
   private selectedContent = '';
 
@@ -47,8 +48,10 @@ export class FurnitureToBuyListComponent implements OnInit {
   }
 
   public updateRemoveAppointmentVisibility(index: number, appointmentEntry: AppointmentsEntry) {
-    this.changedAppointmentEntryDate = appointmentEntry.date;
-    this.changedAppointmentEntryContent = appointmentEntry.content;
+    if (this.updateRemoveAppointmentSelectedIndex === index + 1) {
+      this.toBeChangedAppointmentEntryDate = appointmentEntry.date;
+      this.toBeChangedAppointmentEntryContent = appointmentEntry.content;
+    }
     return this.updateRemoveAppointmentSelectedIndex === index + 1;
   }
 
@@ -68,11 +71,13 @@ export class FurnitureToBuyListComponent implements OnInit {
   }
 
   public updateAppointmentEntry(date: any, content: string, oldContent: string) {
+    this.newChangedAppointmentEntryDate = !!this.newChangedAppointmentEntryDate ? this.newChangedAppointmentEntryDate : date;
     this.appointmentEntries = this.dbAppointmentsService.updateOneAppointment(
-      oldContent, date, content, SortSpecifyKey.DATE, SortSpecifyType.ASCENDING
+      oldContent, this.newChangedAppointmentEntryDate, content, SortSpecifyKey.DATE, SortSpecifyType.ASCENDING
     );
     this.openAppointmentEditMode = false;
     this.updateRemoveAppointmentSelectedIndex = -1;
+    this.newChangedAppointmentEntryDate = '';
   }
 
   public addToAppointmentsList(date: any, content: string) {
@@ -86,7 +91,10 @@ export class FurnitureToBuyListComponent implements OnInit {
 
   public isAppointmentEditMode(index: number) {
     const isSelectedIndex = this.updateRemoveAppointmentSelectedIndex === index + 1;
-    // this.updateRemoveAppointmentSelectedIndex = -1;
     return isSelectedIndex && this.openAppointmentEditMode;
+  }
+
+  public changedAppointmentEntryDate(value: any) {
+    this.newChangedAppointmentEntryDate = value;
   }
 }

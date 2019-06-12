@@ -17,7 +17,7 @@
         {{appointmentEntry.date | date:'EEEE' | dateFormat}}
       </div>
       <ng-template #appointmentDateEditMode>
-        <input type="datetime-local" [(ngModel)]="changedAppointmentEntryDate">
+        <input type="datetime-local" [(ngModel)]="toBeChangedAppointmentEntryDate" (ngModelChange)="changedAppointmentEntryDate($event)">
       </ng-template>
     </td>
     <td>
@@ -25,9 +25,9 @@
         {{appointmentEntry.content}}
       </div>
       <ng-template #appointmentContentEditMode>
-          <input style="max-width: 70%" [(ngModel)]="changedAppointmentEntryContent"
-          (keyup.enter)="updateAppointmentEntry(changedAppointmentEntryDate, changedAppointmentEntryContent, appointmentEntry.content)">
-        <button (click)="updateAppointmentEntry(changedAppointmentEntryDate, changedAppointmentEntryContent, appointmentEntry.content)">保存</button>
+          <input style="max-width: 70%" [value]="toBeChangedAppointmentEntryContent" #changedAppointmentEntryContent
+                 (keyup.enter)="updateAppointmentEntry(toBeChangedAppointmentEntryDate, changedAppointmentEntryContent.value, appointmentEntry.content)">
+        <button (click)="updateAppointmentEntry(toBeChangedAppointmentEntryDate, changedAppointmentEntryContent.value, appointmentEntry.content)">保存</button>
       </ng-template>
       <div *ngIf="updateRemoveAppointmentVisibility(index, appointmentEntry)">
         <button (click)="changeAppointmentEntry()">修改</button>
