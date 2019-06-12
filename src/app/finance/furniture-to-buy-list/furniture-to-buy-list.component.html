@@ -13,7 +13,7 @@
       <div *ngIf="!isAppointmentEditMode(index); else appointmentDateEditMode">
         {{appointmentEntry.date | date:'dd/MM/yyyy'}}
         {{appointmentEntry.date | date:'HH:mm'}}
-        <br>
+        &nbsp;
         {{appointmentEntry.date | date:'EEEE' | dateFormat}}
       </div>
       <ng-template #appointmentDateEditMode>
@@ -30,7 +30,7 @@
         <button (click)="updateAppointmentEntry(changedAppointmentEntryDate, changedAppointmentEntryContent, appointmentEntry.content)">保存</button>
       </ng-template>
       <div *ngIf="updateRemoveAppointmentVisibility(index, appointmentEntry)">
-        <button (click)="changeAppointmentEntry(appointmentEntry)">修改</button>
+        <button (click)="changeAppointmentEntry()">修改</button>
         <button class="button-delete" (click)="deleteAppointmentEntry()">删除</button>
       </div>
     </td>

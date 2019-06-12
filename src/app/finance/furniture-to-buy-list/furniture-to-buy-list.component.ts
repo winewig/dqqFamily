@@ -63,7 +63,7 @@ export class FurnitureToBuyListComponent implements OnInit {
     this.selectedContent = '';
   }
 
-  public changeAppointmentEntry(appointmentEntry: any) {
+  public changeAppointmentEntry() {
     this.openAppointmentEditMode = true;
   }
 
